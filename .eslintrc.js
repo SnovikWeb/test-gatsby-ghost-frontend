@@ -29,7 +29,8 @@ module.exports = {
         "no-inner-declarations": "off",
         "valid-jsdoc": "off",
         "require-jsdoc": "off",
-        "quotes": ["error", "backtick"],
+        'indent': 'off',
+        "quotes": ["error", "double", {"avoidEscape": true, "allowTemplateLiterals": true}],
         "consistent-return": ["error"],
         "arrow-body-style": [
             "error",
@@ -37,7 +38,7 @@ module.exports = {
             { "requireReturnForObjectLiteral": true }
         ],
         "jsx-quotes": ["error", "prefer-double"],
-        "semi": ["error", "never"],
+        "semi": [2, "always"],
         "object-curly-spacing": ["error", "always"],
         "comma-dangle": [
             "error",
