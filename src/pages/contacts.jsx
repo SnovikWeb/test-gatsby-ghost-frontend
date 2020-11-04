@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import Form from '../components/common/Form';
 
 const ContactsPage = () => {
     const [contactFormState, setContactFormState] = useState({
@@ -11,24 +12,39 @@ const ContactsPage = () => {
         });
     };
 
+    const contactForm = {
+        title: 'Контактная форма на странице контактов',
+        name: 'ContactPage-ContactForm',
+        onSubmit: contactFormSubmitHandler,
+        netlify: true,
+        submitCaption: 'Отправить',
+        inputs: [
+            {
+                label: 'Имя пользователя',
+                name: 'name',
+                type: 'text',
+                value: '',
+            }, {
+                label: 'Email',
+                name: 'email',
+                type: 'email',
+                value: '',
+            }, {
+                label: 'Сообщение',
+                name: 'message',
+                type: 'message',
+                value: '',
+            },
+        ],
+    };
+
     return (
         <div>
 
             {
                 contactFormState.status
                     ? <h3>Спасибо за ваше обращение!</h3>
-                    : <form data-netlify="true"
-                            method="post"
-                            name="contact-page_contact-form"
-                            onSubmit={contactFormSubmitHandler}>
-                        <h2>form version 2</h2>
-                        <div className="form-group">
-                            <input type="text" name="name" placeholder="name"/>
-                        </div>
-                        <input type="email" name="email" placeholder="email"/>
-                        <textarea type="text" name="message" placeholder="message"/>
-                        <button type="submit">Send</button>
-                    </form>
+                    : <Form {...contactForm} />
             }
         </div>
     );

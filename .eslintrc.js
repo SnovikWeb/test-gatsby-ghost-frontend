@@ -30,7 +30,7 @@ module.exports = {
         "valid-jsdoc": "off",
         "require-jsdoc": "off",
         'indent': 'off',
-        "quotes": ["error", "double", {"avoidEscape": true, "allowTemplateLiterals": true}],
+        "quotes": ["error", "single", {"avoidEscape": true, "allowTemplateLiterals": true}],
         "consistent-return": ["error"],
         "arrow-body-style": [
             "error",
