@@ -22,6 +22,9 @@ const Form = ({ title, name, onSubmit, submitCaption, inputs, netlify }) => {
             data: qs.stringify(formData),
         };
 
+        console.log('axiosOptions', axiosOptions);
+        console.log('formData', formData);
+
         axios(axiosOptions)
             .then((response) => {
                 console.log('success', response);
