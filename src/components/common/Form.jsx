@@ -11,9 +11,15 @@ const Form = ({ title, name, onSubmit, submitCaption, inputs, netlify }) => {
             data = new FormData(form);
         console.log('form', form);
         console.log('data', data);
-        const answer = fetch(form.action, {
+        const answer = fetch('/', {
             method: 'POST',
-            body: data,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: {
+                'form-name': name,
+                name: data.get('name'),
+                email: data.get('email'),
+                message: data.get('message'),
+            },
         }).then(r => r.json());
         answer
             .then(response => console.log('submitHandler SUCCESS', response))
@@ -28,7 +34,7 @@ const Form = ({ title, name, onSubmit, submitCaption, inputs, netlify }) => {
     ));
 
     return (
-        <form name={name} method="POST" data-netlify={netlify} onSubmit={submitHandler}>
+        <form name={name} method="POST" data-netlify={netlify} data-netlify-honeypot="bot-field" onSubmit={submitHandler}>
             {title ? <h3>{title}</h3> : null}
             {buildInputsStructure()}
             <button type="submit">
