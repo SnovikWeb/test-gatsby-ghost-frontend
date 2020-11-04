@@ -11,15 +11,20 @@ const Form = ({ title, name, onSubmit, submitCaption, inputs, netlify }) => {
             data = new FormData(form);
         console.log('form', form);
         console.log('data', data);
-        const answer = fetch('/', {
+        console.log('action', form.getAttribute('action'));
+        const body = [`form-name=${name}`];
+
+        for (let [key, value] of data) {
+            const encodedKey = encodeURIComponent(key),
+                encodedValue = encodeURIComponent(value);
+            body.push(`${encodedKey}=${encodedValue}`);
+        }
+
+        console.log('body', body.join('&'));
+        const answer = fetch(form.getAttribute('action'), {
             method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: {
-                'form-name': name,
-                name: data.get('name'),
-                email: data.get('email'),
-                message: data.get('message'),
-            },
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+            body: body.join('&'),
         }).then(r => r.json());
         answer
             .then(response => console.log('submitHandler SUCCESS', response))
