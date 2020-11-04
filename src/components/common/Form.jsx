@@ -1,35 +1,34 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
+import qs from 'query-string';
 
 const Form = ({ title, name, onSubmit, submitCaption, inputs, netlify }) => {
+    const formRef = useRef(null);
+
     const submitHandler = (event) => {
         event.preventDefault();
         if (onSubmit) {
             onSubmit(event);
         }
-        const form = event.target,
-            formData = new FormData(form),
-            formattedData = {};
 
-        for (let key of formData.keys()) {
-            formattedData[key] = formData.get(key);
-        }
+        const formData = {};
+        Object.keys(formRef.current).map(key => (formData[key] = formRef.current[key].value));
 
-        console.log(formattedData);
-        console.log(JSON.stringify(formattedData));
-        console.log(encodeURIComponent(JSON.stringify(formattedData)));
-
-        const answer = fetch(location.href, {
-            method: 'POST',
+        const axiosOptions = {
+            url: location.href,
+            method: 'post',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: encodeURIComponent(JSON.stringify(formattedData)),
-        }).then((res) => {
-            console.log('RESPONSE', res);
-            return res.json();
-        });
-        answer
-            .then(response => console.log('submitHandler SUCCESS', response))
-            .catch(err => console.warn('submitHandler ERROR', err));
+            data: qs.stringify(formData),
+        };
+
+        axios(axiosOptions)
+            .then((response) => {
+                console.log('success', response);
+            })
+            .catch((err) => {
+                console.log('err', err);
+            });
     };
 
     const buildInputsStructure = () => inputs.map(input => (
@@ -40,7 +39,8 @@ const Form = ({ title, name, onSubmit, submitCaption, inputs, netlify }) => {
     ));
 
     return (
-        <form name={name} method="POST" data-netlify={netlify ? 'true' : 'false'} data-netlify-honeypot="bot-field"
+        <form ref={formRef} name={name} method="POST" data-netlify={netlify ? 'true' : 'false'}
+              data-netlify-honeypot="bot-field"
               onSubmit={submitHandler}>
             {title ? <h3>{title}</h3> : null}
             <input type="hidden" name="form-name" value={name}/>
