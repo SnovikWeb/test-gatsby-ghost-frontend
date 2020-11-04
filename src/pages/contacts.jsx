@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Form from '../components/common/Form';
+import { Layout } from "../components/common"
 
 const ContactsPage = () => {
     const [contactFormState, setContactFormState] = useState({
@@ -39,14 +40,16 @@ const ContactsPage = () => {
     };
 
     return (
-        <div>
+        <Layout>
+            <div>
 
-            {
-                contactFormState.status
-                    ? <h3>Спасибо за ваше обращение!</h3>
-                    : <Form {...contactForm} />
-            }
-        </div>
+                {
+                    contactFormState.status
+                        ? <h3>Спасибо за ваше обращение!</h3>
+                        : <Form {...contactForm} />
+                }
+            </div>
+        </Layout>
     );
 };
 export default ContactsPage;
