@@ -14,7 +14,7 @@ import { MetaData } from '../components/common/meta'
 const Tag = ({ data, location, pageContext }) => {
     const tag = data.ghostTag
     const posts = data.allGhostPost.edges
-
+    console.log(1);
     return (
         <>
             <MetaData
