@@ -61,10 +61,10 @@ const Form = ({ title, name, onSubmit, submitCaption, inputs, netlify }) => {
     ));
 
     return (
-        <form name={name} method="POST" data-netlify={netlify}>
+        <form name={name} method="POST" data-netlify={netlify} onSubmit={submitHandler}>
             {title ? <h3>{title}</h3> : null}
             {buildInputsStructure()}
-            <button onSubmit={submitHandler}>
+            <button type="submit">
                 {submitCaption}
             </button>
         </form>
