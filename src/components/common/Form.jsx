@@ -14,9 +14,12 @@ const Form = ({ title, name, onSubmit, submitCaption, inputs, netlify }) => {
         for (let key of formData.keys()) {
             formattedData[key] = formData.get(key);
         }
-        console.log(formattedData);
 
-        const answer = fetch(form.getAttribute('action'), {
+        console.log(formattedData);
+        console.log(JSON.stringify(formattedData));
+        console.log(encodeURIComponent(JSON.stringify(formattedData)));
+
+        const answer = fetch(location.href, {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: encodeURIComponent(JSON.stringify(formattedData)),
