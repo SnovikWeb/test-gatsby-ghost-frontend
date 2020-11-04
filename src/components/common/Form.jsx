@@ -8,24 +8,22 @@ const Form = ({ title, name, onSubmit, submitCaption, inputs, netlify }) => {
             onSubmit(event);
         }
         const form = event.target,
-            data = new FormData(form);
-        console.log('form', form);
-        console.log('data', data);
-        console.log('action', form.getAttribute('action'));
-        const body = [`form-name=${name}`];
+            formData = new FormData(form),
+            formattedData = {};
 
-        for (let [key, value] of data) {
-            const encodedKey = encodeURIComponent(key),
-                encodedValue = encodeURIComponent(value);
-            body.push(`${encodedKey}=${encodedValue}`);
+        for (let key of formData.keys()) {
+            formattedData[key] = formData.get(key);
         }
+        console.log(formattedData);
 
-        console.log('body', body.join('&'));
         const answer = fetch(form.getAttribute('action'), {
             method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-            body: body.join('&'),
-        }).then(r => r.json());
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: JSON.stringify(formattedData),
+        }).then((res) => {
+            console.log('RESPONSE', res);
+            return res.json();
+        });
         answer
             .then(response => console.log('submitHandler SUCCESS', response))
             .catch(err => console.warn('submitHandler ERROR', err));
@@ -39,8 +37,10 @@ const Form = ({ title, name, onSubmit, submitCaption, inputs, netlify }) => {
     ));
 
     return (
-        <form name={name} method="POST" data-netlify={netlify} data-netlify-honeypot="bot-field" onSubmit={submitHandler}>
+        <form name={name} method="POST" data-netlify={netlify ? 'true' : 'false'} data-netlify-honeypot="bot-field"
+              onSubmit={submitHandler}>
             {title ? <h3>{title}</h3> : null}
+            <input type="hidden" name="form-name" value={name}/>
             {buildInputsStructure()}
             <button type="submit">
                 {submitCaption}
