@@ -14,7 +14,7 @@ import Form from "../components/common/Form"
 *
 */
 const Page = ({ data, location }) => {
-    const page = data.ghostPage
+    const page = data.ghostPage;
 
     const [contactFormState, setContactFormState] = useState({
         status: false,
@@ -29,7 +29,7 @@ const Page = ({ data, location }) => {
 
     const contactForm = {
         title: 'Контактная форма из шаблона страницы',
-        name: 'PageTemplate-ContactForm',
+        name: 'PageContactForm',
         onSubmit: contactFormSubmitHandler,
         netlify: true,
         submitCaption: 'Отправить',

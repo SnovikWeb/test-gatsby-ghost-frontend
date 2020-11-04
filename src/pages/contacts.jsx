@@ -15,7 +15,7 @@ const ContactsPage = () => {
 
     const contactForm = {
         title: 'Контактная форма на странице контактов',
-        name: 'ContactPage-ContactForm',
+        name: 'ContactForm',
         onSubmit: contactFormSubmitHandler,
         netlify: true,
         submitCaption: 'Отправить',
