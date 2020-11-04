@@ -19,7 +19,7 @@ const Form = ({ title, name, onSubmit, submitCaption, inputs, netlify }) => {
         const answer = fetch(form.getAttribute('action'), {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: JSON.stringify(formattedData),
+            body: encodeURIComponent(JSON.stringify(formattedData)),
         }).then((res) => {
             console.log('RESPONSE', res);
             return res.json();
