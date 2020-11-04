@@ -12,6 +12,7 @@ const Form = ({ title, name, onSubmit, submitCaption, inputs, netlify }) => {
         console.log('form', form);
         console.log('data', data);
         const answer = fetch(form.action, {
+            method: 'POST',
             body: data,
         }).then(r => r.json());
         answer
