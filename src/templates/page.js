@@ -21,6 +21,7 @@ const Page = ({ data, location }) => {
     });
 
     const contactFormSubmitHandler = () => {
+        console.log('Page form send');
         setContactFormState({
             status: true,
         });
