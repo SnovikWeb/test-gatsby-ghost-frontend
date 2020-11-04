@@ -17,7 +17,7 @@ const ContactsPage = () => {
             {
                 contactFormState.status
                     ? <h3>Спасибо за ваше обращение!</h3>
-                    : <form netlify
+                    : <form data-netlify="true"
                             name="contact-page_contact-form"
                             onSubmit={contactFormSubmitHandler}>
                         <div className="form-group">
