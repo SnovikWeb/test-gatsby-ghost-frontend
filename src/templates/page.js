@@ -16,43 +16,6 @@ import Form from "../components/common/Form"
 const Page = ({ data, location }) => {
     const page = data.ghostPage;
 
-    const [contactFormState, setContactFormState] = useState({
-        status: false,
-    });
-
-    const contactFormSubmitHandler = () => {
-        console.log('Page form send');
-        setContactFormState({
-            status: true,
-        });
-    };
-
-    const contactForm = {
-        title: 'Контактная форма из шаблона страницы',
-        name: 'PageContactForm',
-        onSubmit: contactFormSubmitHandler,
-        netlify: true,
-        submitCaption: 'Отправить',
-        inputs: [
-            {
-                label: 'Имя пользователя',
-                name: 'name',
-                type: 'text',
-                value: '',
-            }, {
-                label: 'Email',
-                name: 'email',
-                type: 'email',
-                value: '',
-            }, {
-                label: 'Сообщение',
-                name: 'message',
-                type: 'message',
-                value: '',
-            },
-        ],
-    };
-
     return (
         <>
             <MetaData
@@ -75,13 +38,6 @@ const Page = ({ data, location }) => {
                         />
                     </article>
                 </div>
-
-                {
-                    contactFormState.status
-                        ? <h3>Спасибо за ваше обращение!</h3>
-                        : <Form {...contactForm} />
-                }
-
             </Layout>
         </>
     );

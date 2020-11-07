@@ -15,6 +15,9 @@ exports.createPages = async ({ graphql, actions }) => {
                 edges {
                     node {
                         slug
+                        tags {
+                            name
+                        }
                     }
                 }
             }
@@ -64,6 +67,9 @@ exports.createPages = async ({ graphql, actions }) => {
     const authorTemplate = path.resolve(`./src/templates/author.js`)
     const pageTemplate = path.resolve(`./src/templates/page.js`)
     const postTemplate = path.resolve(`./src/templates/post.js`)
+    const articleType1Template = path.resolve(`./src/templates/articles/article-1.js`)
+    const articleType2Template = path.resolve(`./src/templates/articles/article-2.js`)
+    const articleType3Template = path.resolve(`./src/templates/articles/article-3.js`)
 
     // Create tag pages
     tags.forEach(({ node }) => {
@@ -174,13 +180,26 @@ exports.createPages = async ({ graphql, actions }) => {
         // a `/:slug/` permalink.
         node.url = `/${node.slug}/`
 
+        let component = postTemplate;
+        node.tags.forEach(({name}) => {
+            if (name === '#Article-1 [template]') {
+                component = articleType1Template;
+            }
+            if (name === '#Article-2 [template]') {
+                component = articleType2Template;
+            }
+            if (name === '#Article-3 [template]') {
+                component = articleType3Template;
+            }
+        });
+
         createPage({
             path: node.url,
-            component: postTemplate,
+            component,
             context: {
                 // Data passed to context is available
                 // in page queries as GraphQL variables.
-                slug: node.slug,
+                slug: node.slug
             },
         })
     })

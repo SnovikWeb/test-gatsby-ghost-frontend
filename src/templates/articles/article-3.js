@@ -3,18 +3,12 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import { Helmet } from 'react-helmet'
 
-import { Layout } from '../components/common'
-import { MetaData } from '../components/common/meta'
+import { Layout } from '../../components/common'
+import { MetaData } from '../../components/common/meta'
 
-/**
-* Single post view (/:slug)
-*
-* This file renders a single post and loads all the content.
-*
-*/
-const Post = ({ data, location }) => {
+
+const ArticleType3 = ({ data, location }) => {
     const post = data.ghostPost
-    console.log('post', data);
 
     return (
         <>
@@ -28,6 +22,7 @@ const Post = ({ data, location }) => {
             </Helmet>
             <Layout>
                 <div className="container">
+                    <h2>ЭТО СТАТЬЯ ТИПА №3</h2>
                     <article className="content">
                         { post.feature_image ?
                             <figure className="post-feature-image">
@@ -49,7 +44,7 @@ const Post = ({ data, location }) => {
     )
 }
 
-Post.propTypes = {
+ArticleType3.propTypes = {
     data: PropTypes.shape({
         ghostPost: PropTypes.shape({
             codeinjection_styles: PropTypes.object,
@@ -61,7 +56,7 @@ Post.propTypes = {
     location: PropTypes.object.isRequired,
 }
 
-export default Post
+export default ArticleType3
 
 export const postQuery = graphql`
     query($slug: String!) {

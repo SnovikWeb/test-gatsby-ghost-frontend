@@ -63,8 +63,10 @@ module.exports = {
             resolve: `gatsby-source-ghost`,
             options:
                 {
-                    apiUrl: `https://stashitrich.ghost.io`,
-                    contentApiKey: `fa053c50c3e606a5b2ef9a421c`,
+                    // apiUrl: `https://stashitrich.ghost.io`,  // Платный на официальном сайте Ghost PRO
+                    apiUrl: `https://gatsbywithghostadmin.herokuapp.com`,
+                    // contentApiKey: `fa053c50c3e606a5b2ef9a421c`, // Платный на официальном сайте GHOST PRO
+                    contentApiKey:'2a7edbcace2c259e96c0b01a51',
                     version: `v3`,
                 },
         },
